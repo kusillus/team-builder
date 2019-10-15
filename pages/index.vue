@@ -16,6 +16,7 @@
 		</div>
 	</div> -->
 	<div>
+		<input type="text" v-model="input.name">
 		<input type="file" name="avatar" @change="fileImagenChange" accept="image/png, image/jpeg">
 		<img :src="urlImagen" alt="">
 	</div>
@@ -50,6 +51,9 @@ export default {
 	},
 	methods: {
 		fileImagenChange(evt) {
+			/*
+				TODO: Docs: https://firebase.google.com/docs/storage/web/upload-files?hl=es-419
+			*/
 			let vm 		 = this,
 				file = evt.target.files[0],
 				metadata = {
