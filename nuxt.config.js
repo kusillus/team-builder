@@ -23,12 +23,18 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/plugins/lego_components/fonts/icomoon/style.css',
+    '@/plugins/lego_components/scss/main.scss'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/firebase.js'
+    { src: '@/plugins/firebase.js', ssr: true},
+    { src: '@/plugins/lego_components.js', ssr: true},
+    // '@/plugins/fireauth.js'
+    // { src: '@/plugins/sweetAlert2.js', ssr: false}
+    
   ],
   /*
   ** Nuxt.js dev-modules
@@ -37,6 +43,9 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
   ],
+  // router: {
+  //   middleware: 'router-auth'
+  // },
   /*
   ** Nuxt.js modules
   */

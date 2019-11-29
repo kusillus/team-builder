@@ -1,5 +1,8 @@
 <template>
 <div class="container mx-auto flex-wrap content-start" :class="{'bg-gray-400': lockdata}">
+	<nuxt-link class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" to="/publicaciones">
+		publicaciones
+	</nuxt-link>
 	<!-- <div class="w-full m-5">
 		<button type="button" class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" @click="setActiveTab(1)">Active 1</button>
 		<button type="button" class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" @click="setActiveTab(2)">Active 2</button>
@@ -16,6 +19,11 @@
 		</div>
 	</div> -->
 	<div>
+		<button class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" @click="checkLogin()">
+			Validar Usuario
+		</button>
+	</div>
+	<div>
 		<input type="text" v-model="input.name">
 		<input type="file" name="avatar" @change="fileImagenChange" accept="image/png, image/jpeg">
 		<img :src="urlImagen" alt="">
@@ -31,9 +39,11 @@ import SearchDocument from '~/components/Home/SearchDocument.vue'
 import { 
 	fireFirestore,
 	fireDatabase,
-	fireStorage } from '@/plugins/firebase.js'
+	fireStorage,
+	fireAuth } from '@/plugins/firebase.js'
 
 export default {
+	layout: 'admin',
 	data() {
 		return {
 			lockdata: false,
@@ -50,6 +60,17 @@ export default {
 		this.syncRealTime()
 	},
 	methods: {
+		checkLogin() {
+			fireAuth.onAuthStateChanged(firebaseUser => {
+				if (firebaseUser) {
+				console.log('logged in');
+				} 
+				else {
+				console.log('not logged in')
+				}
+			});
+		},
+
 		fileImagenChange(evt) {
 			/*
 				TODO: Docs: https://firebase.google.com/docs/storage/web/upload-files?hl=es-419

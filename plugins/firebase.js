@@ -27,10 +27,11 @@ if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig)
 }
 
-const fireFirestore = firebase.firestore(),
+const fireAuth = firebase.auth(),
+      fireFirestore = firebase.firestore(),
       fireDatabase = firebase.database(),
       fireStorage = firebase.storage()
 
 export { 
-	fireFirestore, fireDatabase, fireStorage
+	fireAuth, fireFirestore, fireDatabase, fireStorage
 }
